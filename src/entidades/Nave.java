@@ -57,6 +57,7 @@ public class Nave extends Imagen implements Config {
             }
         }
         if(i < disparos.size()) disparos.remove(i);
+        System.out.println(disparos.size());
     }
     
     /**
