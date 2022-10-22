@@ -4,6 +4,8 @@
  */
 package controladores;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import javax.swing.JFrame;
 
 /**
@@ -16,12 +18,25 @@ public class VentanaPrincipal {
     public VentanaPrincipal(PanelJuego panel) {
         this.ventana = new JFrame();
         
-        ventana.setEnabled(true);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.add(panel); 
-        ventana.setLocationRelativeTo(null);  
+        
         ventana.setResizable(false);
         ventana.pack();
+        ventana.setLocationRelativeTo(null);  
         ventana.setVisible(true);
+        ventana.addWindowFocusListener(new WindowFocusListener() {
+
+                @Override
+                public void windowLostFocus(WindowEvent e) {
+                    panel.getJuego().windowFocusLost();
+                }
+
+                @Override
+                public void windowGainedFocus(WindowEvent e) {
+                        // TODO Auto-generated method stub
+
+                }
+        });
     }
 }

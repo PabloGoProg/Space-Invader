@@ -45,6 +45,9 @@ public class Jugando extends Estado implements MetodosEstado {
     
     @Override
     public void actualizar() {
+        for(Estrella temp : estrellas) {
+            temp.actualizarPosicion();
+        }
         this.nave.actualizarEstdo();
     }
 

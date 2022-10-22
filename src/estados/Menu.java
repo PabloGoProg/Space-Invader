@@ -4,18 +4,16 @@
  */
 package estados;
 
-import controladores.Juego;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import controladores.Juego;
 
 /**
  *
  * @author jpgonzalez
  */
 public class Menu extends Estado implements MetodosEstado {
-    
-    private Juego juego;
     
     public Menu(Juego juego) {
         super(juego);
@@ -46,13 +44,10 @@ public class Menu extends Estado implements MetodosEstado {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_G:
-                EstadosDeJuego.estadoActual = EstadosDeJuego.JUGANDO;
+            case KeyEvent.VK_A:
                 System.out.println("Funciona");
                 break;
         }
     }
-     
 }    
-
 

@@ -20,12 +20,10 @@ public class PanelJuego extends JPanel {
     private Juego juego;
     
     public PanelJuego(Juego juego) {
-        this.setLayout(null);
         this.juego = juego;
-
+        setReslucion();
         addKeyListener(new InputTeclado(this));
         this.setBackground(Color.BLACK);
-        setReslucion();
     }
     
     /**

@@ -32,12 +32,14 @@ public class InputTeclado implements KeyListener {
                 break;
             case KeyEvent.VK_A:
                 panelJuego.getJuego().getJugando().getNave().setLeft(false);
+                panelJuego.getJuego().getJugando().getNave().setMoviendose(false);
                 break;
             case KeyEvent.VK_S:
                 panelJuego.getJuego().getJugando().getNave().setDown(false);
                 break;
             case KeyEvent.VK_D:
                 panelJuego.getJuego().getJugando().getNave().setRight(false);
+                panelJuego.getJuego().getJugando().getNave().setMoviendose(false);
                 break;
         }
     }
@@ -50,12 +52,14 @@ public class InputTeclado implements KeyListener {
                 break;
             case KeyEvent.VK_A:
                 panelJuego.getJuego().getJugando().getNave().setLeft(true);
+                panelJuego.getJuego().getJugando().getNave().setMoviendose(true);
                 break;
             case KeyEvent.VK_S:
                 panelJuego.getJuego().getJugando().getNave().setDown(true);
                 break;
             case KeyEvent.VK_D:
                 panelJuego.getJuego().getJugando().getNave().setRight(true);
+                panelJuego.getJuego().getJugando().getNave().setMoviendose(true);
                 break;
             case KeyEvent.VK_L:
                 panelJuego.getJuego().getJugando().getNave().disparar();
@@ -65,5 +69,4 @@ public class InputTeclado implements KeyListener {
                 break;
         }
     }
-    
 }

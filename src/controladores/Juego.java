@@ -18,6 +18,7 @@ public class Juego implements Runnable {
     private PanelJuego panel;
     private Thread hiloJuego;
     private int FPS = 120;  // Cantidad de fps en el juego
+    private int UPS = 200;
     
     private Jugando jugando;
     private Menu menu;
@@ -37,11 +38,22 @@ public class Juego implements Runnable {
     @Override
     public void run() {
         double tiempoPorFrame = 1000000000.0 / getFPS();
+        double tiempoPorActu = 1000000000.0 / getUPS();
         long ultimoFrame = System.nanoTime();
         long actual = System.nanoTime();
+        long tiempoPrevio = System.nanoTime();
+        
+        double deltaActu = 0;
 
         while(true) {
             actual = System.nanoTime();
+            long tiempoActual = System.nanoTime();
+            deltaActu += (tiempoActual - tiempoPrevio) / tiempoPorActu;
+            tiempoPrevio = tiempoActual;
+            if(deltaActu >= 1) {
+                actualizar();
+                deltaActu --;
+            }
             if(actual - ultimoFrame >= tiempoPorFrame) {
                 getPanel().repaint();
                 ultimoFrame = actual;
@@ -175,5 +187,23 @@ public class Juego implements Runnable {
      */
     public void setMenu(Menu menu) {
         this.menu = menu;
+    }
+
+    void windowFocusLost() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    /**
+     * @return the UPS
+     */
+    public int getUPS() {
+        return UPS;
+    }
+
+    /**
+     * @param UPS the UPS to set
+     */
+    public void setUPS(int UPS) {
+        this.UPS = UPS;
     }
 }

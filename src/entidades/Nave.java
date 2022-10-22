@@ -4,6 +4,7 @@
  */
 package entidades;
 
+import static animaciones.constantes.Direccion.*;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -19,13 +20,20 @@ public class Nave extends Imagen implements Config {
     private int naveUsada = 0;
     private boolean up, down, left, right;
     private float velocidad = 2.0f;
+    private int direccionJugador = -1;
+    private boolean moviendose = false;
+    private int ultimaAni = 0;
+    private int cambioAni = 25, velocidadAni = 0;
     private ArrayList<Disparo> disparos;
+    private ArrayList<Image> movAni;
     
     public Nave(boolean maquina, float x, float y, int ancho, int alto) {
         super(maquina, x, y, ancho, alto);
         this.posiblesNaves = new ArrayList<>();
         this.disparos = new ArrayList<>();
+        this.movAni = new ArrayList<>();
         sacarImagenes(); // Agrega las imagenes al arraylist
+        sacarImgAni();
     }
     
     /**
@@ -34,6 +42,7 @@ public class Nave extends Imagen implements Config {
     public void actualizarEstdo() {
         actualizarPosicion();
         actualizarDiapros();
+        actualizarAnimacion();
     }
     
     /**
@@ -50,14 +59,12 @@ public class Nave extends Imagen implements Config {
     public void actualizarDiapros() {
         int i = Integer.MAX_VALUE;
         for (Disparo actual : getDisparos()) {
-            if(!actual.isEnRango()) {
-                i = disparos.indexOf(actual);
-            } else {
+            if(!actual.isEnRango()) i = getDisparos().indexOf(actual);
+            else {
                 actual.actualizarPosicion();
             }
         }
-        if(i < disparos.size()) disparos.remove(i);
-        System.out.println(disparos.size());
+        if(i < getDisparos().size()) getDisparos().remove(i);
     }
     
     /**
@@ -69,13 +76,14 @@ public class Nave extends Imagen implements Config {
     public void actualizarPosicion() {
        if(isLeft() && !isRight() && this.getX() > 0) {
            this.setX(this.getX() - getVelocidad());
+           this.setDireccionJugador(IZQUIERDA);
        } else if(!isLeft() && isRight() && this.getX() <Config.WIDTH - this.getAncho()) {
            this.setX(this.getX() + getVelocidad());
+           this.setDireccionJugador(DERECHA);
        }
-       
-       if(isUp() && !isDown() && this.getY() > 0) {
-           this.setY(this.getY() - getVelocidad());
-       } else if(!isUp() && isDown() && this.getY() < Config.HEIGH - this.getAlto()) {
+     
+       if(isUp() && !isDown() && this.getY() > 0) this.setY(this.getY() - getVelocidad());
+       else if(!isUp() && isDown() && this.getY() < Config.HEIGH - this.getAlto()) {
            this.setY(this.getY() + getVelocidad());
        }
     }
@@ -88,11 +96,11 @@ public class Nave extends Imagen implements Config {
     public void renderizar(Graphics g) {
         Toolkit t = Toolkit.getDefaultToolkit();
         Image imagen = t.getImage(getPosiblesNaves().get(getNaveUsada()).getRuta());
+        g.drawImage(movAni.get(ultimaAni), (int) getX()-35, (int) getY(),64, 64, null);
         g.drawImage(imagen, (int) getX(), (int) getY(), 64, 64, null);
         for(Disparo temp : getDisparos()) {
             temp.renderizar(g);
         }
-        actualizarEstdo();
     }
     
     /**
@@ -104,6 +112,38 @@ public class Nave extends Imagen implements Config {
         getPosiblesNaves().add(new Imagen("src/recursos/Ship4.png", false));
         getPosiblesNaves().add(new Imagen("src/recursos/Ship5.png", false));
         getPosiblesNaves().add(new Imagen("src/recursos/Ship6.png", false));
+    }
+    
+    public void sacarImgAni() {
+        Toolkit t = Toolkit.getDefaultToolkit();
+        movAni.add(t.getImage("src/recursos/exhaust1.png"));
+        movAni.add(t.getImage("src/recursos/exhaust2.png"));
+        movAni.add(t.getImage("src/recursos/exhaust3.png"));
+        movAni.add(t.getImage("src/recursos/exhaust4.png"));
+    }
+    
+    public void actualizarAnimacion() {
+        if(moviendose) {
+            velocidadAni++;
+            verificarDireccion();
+        } else {
+            velocidadAni--;
+            if(velocidadAni == 0) {
+                if(ultimaAni > 0) ultimaAni--;
+                velocidadAni = cambioAni * 2;
+            }
+        }
+    }
+    
+    public void verificarDireccion() {
+        if(velocidadAni >= cambioAni) {
+            if(direccionJugador == DERECHA && ultimaAni < movAni.size()-1) {
+                ultimaAni++;
+            } else if(direccionJugador == IZQUIERDA && ultimaAni > 0) {
+                ultimaAni--;
+            }
+            velocidadAni = 0;
+        }
     }
 
     /**
@@ -196,5 +236,33 @@ public class Nave extends Imagen implements Config {
      */
     public void setDisparos(ArrayList<Disparo> disparos) {
         this.disparos = disparos;
+    }
+
+    /**
+     * @return the direccionJugador
+     */
+    public int getDireccionJugador() {
+        return direccionJugador;
+    }
+
+    /**
+     * @param direccionJugador the direccionJugador to set
+     */
+    public void setDireccionJugador(int direccionJugador) {
+        this.direccionJugador = direccionJugador;
+    }
+
+    /**
+     * @return the moviendose
+     */
+    public boolean isMoviendose() {
+        return moviendose;
+    }
+
+    /**
+     * @param moviendose the moviendose to set
+     */
+    public void setMoviendose(boolean moviendose) {
+        this.moviendose = moviendose;
     }
 }
