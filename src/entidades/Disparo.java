@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,9 +16,12 @@ import java.awt.geom.Rectangle2D;
  */
 public class Disparo extends Imagen implements Config{
     private Rectangle2D.Float hitbox;
-    private float velocidadProyectil = 3.0f;
+    private float velocidadProyectil = 2.0f;
     private int direccion = 1;
     private boolean enRango = true;
+    private ArrayList<Image> imagenesAni;
+    private int ultimaAni = 0;
+    private int cambioAni = 15, velocidadAni = 0;
     
     /**
      * Genera un vuevo proyectil de disparo con las coordenadas dadas
@@ -31,14 +35,19 @@ public class Disparo extends Imagen implements Config{
     public Disparo(boolean maquina, float x, float y, int ancho, int alto, int direccion) {
         super(maquina, x, y, ancho, alto);
         hitbox = new Rectangle2D.Float(x, y, 16, 16);
+        this.imagenesAni = new ArrayList<>();
+        imagenesAnimacion();
         this.direccion = direccion;
+    }
+    
+    public void actualizarEstado() {
+        actualizarPosicion();
+        actualizarAnimacion();
     }
     
     @Override
     public void renderizar(Graphics g) {
-        Toolkit t = Toolkit.getDefaultToolkit();
-        Image temp = t.getImage("src/recursos/shot6_3.png");
-        g.drawImage(temp, (int) this.getX(), (int) this.getY(), 128, 128, null);
+        g.drawImage(imagenesAni.get(ultimaAni), (int) this.getX(), (int) this.getY(), 128, 128, null);
     }
     
     /**
@@ -52,6 +61,24 @@ public class Disparo extends Imagen implements Config{
         this.x += getDireccion() * getVelocidadProyectil();
     }
     
+    public void imagenesAnimacion() {
+        Toolkit t = Toolkit.getDefaultToolkit();
+        imagenesAni.add(t.getImage("src/disparoNave/disp1.png"));
+        imagenesAni.add(t.getImage("src/disparoNave/disp2.png"));
+        imagenesAni.add(t.getImage("src/disparoNave/disp3.png"));
+        imagenesAni.add(t.getImage("src/disparoNave/disp4.png"));
+    }
+    
+    public void actualizarAnimacion() {
+        if(ultimaAni < imagenesAni.size()-1) {
+            velocidadAni++;
+            if(velocidadAni >= cambioAni) {
+                ultimaAni++;
+                velocidadAni = 0;
+                cambioAni += 5;
+            }
+        }
+    }
     
     /**
      * Setea la posicion inicial del siapro

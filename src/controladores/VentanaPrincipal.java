@@ -3,9 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controladores;
-
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 import javax.swing.JFrame;
 
 /**
@@ -25,18 +22,5 @@ public class VentanaPrincipal {
         ventana.pack();
         ventana.setLocationRelativeTo(null);  
         ventana.setVisible(true);
-        ventana.addWindowFocusListener(new WindowFocusListener() {
-
-                @Override
-                public void windowLostFocus(WindowEvent e) {
-                    panel.getJuego().windowFocusLost();
-                }
-
-                @Override
-                public void windowGainedFocus(WindowEvent e) {
-                        // TODO Auto-generated method stub
-
-                }
-        });
     }
 }

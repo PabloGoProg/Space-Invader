@@ -43,6 +43,9 @@ public class Nave extends Imagen implements Config {
         actualizarPosicion();
         actualizarDiapros();
         actualizarAnimacion();
+        for(Disparo cur : disparos) {
+            cur.actualizarEstado();
+        }
     }
     
     /**
@@ -114,6 +117,9 @@ public class Nave extends Imagen implements Config {
         getPosiblesNaves().add(new Imagen("src/recursos/Ship6.png", false));
     }
     
+    /**
+     * Añade las imagenes para animacion de movimiento al arraylist correspondiente
+     */
     public void sacarImgAni() {
         Toolkit t = Toolkit.getDefaultToolkit();
         movAni.add(t.getImage("src/recursos/exhaust1.png"));
@@ -122,6 +128,10 @@ public class Nave extends Imagen implements Config {
         movAni.add(t.getImage("src/recursos/exhaust4.png"));
     }
     
+    /**
+     * Se encarga de determinar el timing para la actualuzacion de la animacionde
+     * del movimiento de la nave
+     */
     public void actualizarAnimacion() {
         if(moviendose) {
             velocidadAni++;
@@ -135,6 +145,10 @@ public class Nave extends Imagen implements Config {
         }
     }
     
+    /**
+     * Acelera o desacelera la nave dependiendo de la dirección en la que se 
+     * encuentre una accion (izquierda o derecha)
+     */
     public void verificarDireccion() {
         if(velocidadAni >= cambioAni) {
             if(direccionJugador == DERECHA && ultimaAni < movAni.size()-1) {
