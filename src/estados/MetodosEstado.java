@@ -12,7 +12,10 @@ import java.awt.event.KeyEvent;
  * @author jpgonzalez
  */
 public interface MetodosEstado {
-        
+    
+    public final int WIDTH = 1280;
+    public final int HEIGH = 680;
+    
     public void actualizar();
     
     public void actualizarRenderizado(Graphics g);

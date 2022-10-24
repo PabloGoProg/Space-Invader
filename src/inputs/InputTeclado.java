@@ -64,7 +64,7 @@ public class InputTeclado implements KeyListener {
             case KeyEvent.VK_L:
                 panelJuego.getJuego().getJugando().getNave().disparar();
                 break;
-            case KeyEvent.VK_G:
+            case KeyEvent.VK_ENTER:
                 EstadosDeJuego.estadoActual = EstadosDeJuego.JUGANDO;
                 break;
         }

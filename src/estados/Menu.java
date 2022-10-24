@@ -4,16 +4,24 @@
  */
 package estados;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import controladores.Juego;
+import entidades.Config;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 
 /**
  *
  * @author jpgonzalez
  */
 public class Menu extends Estado implements MetodosEstado {
+    
     
     public Menu(Juego juego) {
         super(juego);
@@ -27,8 +35,17 @@ public class Menu extends Estado implements MetodosEstado {
 
     @Override
     public void actualizarRenderizado(Graphics g) {
-        g.setColor(Color.WHITE);
-        g.drawString("Menu de Juego", 400, 250);
+        //fondo
+        Toolkit t = Toolkit.getDefaultToolkit();
+        Image img = t.getImage("src/recursos/6356f81442421.jpg");
+        g.drawImage(img, 0, 0, MetodosEstado.WIDTH, MetodosEstado.HEIGH, null);
+        //Boton play
+//        Image btnPlay = t.getImage("src/recursos/botonPlay.png");
+//        g.drawImage(btnPlay, (MetodosEstado.WIDTH/2)-80, (MetodosEstado.HEIGH/2)-100, 150,150,null);
+          g.setFont(new Font( "Tahoma", Font.BOLD, 46 ) );
+          Color c = new Color(174,149,179);
+          g.setColor(c);
+          g.drawString("PRESS ENTER TO PLAY", (MetodosEstado.WIDTH/2)-250, (MetodosEstado.HEIGH/2)-100);
     }
 
     @Override
@@ -49,5 +66,6 @@ public class Menu extends Estado implements MetodosEstado {
                 break;
         }
     }
+    
 }    
 
