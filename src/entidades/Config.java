@@ -11,8 +11,8 @@ import java.awt.Graphics;
  * @author jpgonzalez
  */
 public interface Config {
-    public final int WIDTH = 800;
-    public final int HEIGH = 620;
+    public final int WIDTH = 1280;
+    public final int HEIGH = 680;
     
     public void renderizar(Graphics g);
     public void actualizarPosicion();

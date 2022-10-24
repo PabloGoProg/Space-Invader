@@ -38,21 +38,17 @@ public class Jugando extends Estado implements MetodosEstado {
     private void desplegarComponentes() {
         setNave(new Nave(false, 368f, 278f, 64, 64));
         getImagenes().add(getNave());
-        for(int i = 0; i < (int)Math.random()*50+25; i++){
+        for(int i = 0; i < (int)Math.random()*100+80; i++){
             this.estrellas.add(new Estrella(false, 
-                    Math.round(Math.random()*800+10), 
-                    Math.round(Math.random()*620+10), 7, 7));
+                    Math.round(Math.random()*Config.WIDTH+10), 
+                    Math.round(Math.random()*Config.HEIGH+10), 7, 7));
         }
         this.crearEnemigos();
     }
     
     public void crearEnemigos(){
-        long timer = System.currentTimeMillis();
             for (int i = 0; i < 5; i++) {
-                timer = System.currentTimeMillis();
-                if(timer>=1000){
-                    this.imagenes.add(new Enemigo(true, Math.round(Math.random()*Config.WIDTH+850),Math.round(Math.random()*540+5) , 48, 48));
-                }
+               this.imagenes.add(new Enemigo(true, Math.round(Math.random()*Config.WIDTH+1100),Math.round(Math.random()*540+5) , 48, 48));
             }
         }
     
