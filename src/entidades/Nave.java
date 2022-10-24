@@ -23,7 +23,7 @@ public class Nave extends Imagen implements Config {
     private int direccionJugador = -1;
     private boolean moviendose = false;
     private int ultimaAni = 0;
-    private int cambioAni = 25, velocidadAni = 0;
+    private int cambioAni = 30, velocidadAni = 0;
     private ArrayList<Disparo> disparos;
     private ArrayList<Image> movAni;
     
@@ -133,30 +133,30 @@ public class Nave extends Imagen implements Config {
      * del movimiento de la nave
      */
     public void actualizarAnimacion() {
-        if(moviendose) {
-            velocidadAni++;
-            verificarDireccion();
+        if(moviendose && direccionJugador == DERECHA) {
+            acelerar();
         } else {
-            velocidadAni--;
-            if(velocidadAni == 0) {
-                if(ultimaAni > 0) ultimaAni--;
-                velocidadAni = cambioAni * 2;
+            desacelerar();
+        }
+    }
+    
+    public void acelerar() {
+        if(velocidadAni < cambioAni) {
+            velocidadAni++;
+            if(velocidadAni == cambioAni && ultimaAni < movAni.size()-1) {
+                ultimaAni++;
+                velocidadAni = 0;
             }
         }
     }
     
-    /**
-     * Acelera o desacelera la nave dependiendo de la dirección en la que se 
-     * encuentre una accion (izquierda o derecha)
-     */
-    public void verificarDireccion() {
-        if(velocidadAni >= cambioAni) {
-            if(direccionJugador == DERECHA && ultimaAni < movAni.size()-1) {
-                ultimaAni++;
-            } else if(direccionJugador == IZQUIERDA && ultimaAni > 0) {
+    public void desacelerar() {
+        if(velocidadAni > 0) {
+            velocidadAni--;
+            if(velocidadAni == 0 && ultimaAni > 0) {
                 ultimaAni--;
+                velocidadAni = cambioAni;
             }
-            velocidadAni = 0;
         }
     }
 

@@ -3,24 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/inputs/InputTeclado.java</file>
             <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/controladores/Juego.java</file>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/entidades/Config.java</file>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/entidades/Estrella.java</file>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/estados/EstadosDeJuego.java</file>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/controladores/PanelJuego.java</file>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/animaciones/constantes.java</file>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/controladores/SpaceInvaders.java</file>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/estados/Muerte.java</file>
             <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/entidades/Disparo.java</file>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/estados/MetodosEstado.java</file>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/estados/Jugando.java</file>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/estados/Estado.java</file>
+            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/disparoNave/disp1.png</file>
+            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/disparoNave/disp2.png</file>
+            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/disparoNave/disp6.png</file>
+            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/disparoNave/shot5_asset.png</file>
             <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/entidades/Nave.java</file>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/estados/Menu.java</file>
+            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/disparoNave/disp4.png</file>
+            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/disparoNave/disp5.png</file>
             <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/controladores/VentanaPrincipal.java</file>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/entidades/Imagen.java</file>
-            <file>file:/Users/jpgonzalez/NetBeansProjects/SpaceInvaders/src/recursos/shot6_3.png</file>
         </group>
     </open-files>
 </project-private>
