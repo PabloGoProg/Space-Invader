@@ -24,12 +24,14 @@ public class PanelJuego extends JPanel {
 
     private Juego juego;
     private JButton play;
+    private SClip menuSound = new SClip("src/recursos/menuSound.wav");
     
     public PanelJuego(Juego juego) {
         this.juego = juego;
         setReslucion();
         addKeyListener(new InputTeclado(this));
         this.setBackground(Color.BLACK);
+        this.menuSound.loop();
     }
     
     /**
@@ -64,4 +66,12 @@ public class PanelJuego extends JPanel {
     public JButton getPlay() {
         return play;
     }
+
+    public SClip getMenuSound() {
+        return menuSound;
+    }
+
+    
+    
+    
 }

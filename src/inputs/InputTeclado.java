@@ -5,6 +5,7 @@
 package inputs;
 
 import controladores.PanelJuego;
+import controladores.SClip;
 import estados.EstadosDeJuego;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -15,6 +16,7 @@ import java.awt.event.KeyListener;
  */
 public class InputTeclado implements KeyListener {
     private PanelJuego panelJuego;
+    SClip mario = new SClip("src/recursos/mario.wav");
 
     public InputTeclado(PanelJuego panelJuego) {
         this.panelJuego = panelJuego;
@@ -67,6 +69,8 @@ public class InputTeclado implements KeyListener {
                 break;
             case KeyEvent.VK_ENTER:
                 EstadosDeJuego.estadoActual = EstadosDeJuego.JUGANDO;
+                this.panelJuego.getMenuSound().stop();
+                this.mario.play();
                 break;
         }
     }

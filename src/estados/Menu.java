@@ -7,6 +7,7 @@ package estados;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import controladores.Juego;
+import controladores.SClip;
 import entidades.Config;
 import java.awt.Color;
 import java.awt.Font;
@@ -22,6 +23,7 @@ import javax.swing.JButton;
  */
 public class Menu extends Estado implements MetodosEstado {
     
+    SClip soundtrack = new SClip("src/recursos/soundtrack.wav");
     
     public Menu(Juego juego) {
         super(juego);
@@ -30,7 +32,7 @@ public class Menu extends Estado implements MetodosEstado {
 
     @Override
     public void actualizar() {
-        
+        this.soundtrack.loop();
     }
 
     @Override
