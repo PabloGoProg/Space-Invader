@@ -31,7 +31,7 @@ public class Imagen {
     
     public Imagen(String ruta, boolean maquina) {
         this.ruta = ruta;
-        this.maquina = true;
+        this.maquina = maquina;
     }
 
     public String getRuta() {

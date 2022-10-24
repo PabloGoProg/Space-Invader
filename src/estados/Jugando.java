@@ -5,6 +5,8 @@
 package estados;
 
 import controladores.Juego;
+import entidades.Config;
+import entidades.Enemigo;
 import entidades.Estrella;
 import entidades.Imagen;
 import entidades.Nave;
@@ -41,7 +43,19 @@ public class Jugando extends Estado implements MetodosEstado {
                     Math.round(Math.random()*800+10), 
                     Math.round(Math.random()*620+10), 7, 7));
         }
+        this.crearEnemigos();
     }
+    
+    public void crearEnemigos(){
+        long timer = System.currentTimeMillis();
+            for (int i = 0; i < 5; i++) {
+                timer = System.currentTimeMillis();
+                if(timer>=1000){
+                    this.imagenes.add(new Enemigo(true, Math.round(Math.random()*Config.WIDTH+850),Math.round(Math.random()*540+5) , 48, 48));
+                }
+            }
+        }
+    
     
     @Override
     public void actualizar() {
@@ -49,6 +63,11 @@ public class Jugando extends Estado implements MetodosEstado {
             temp.actualizarPosicion();
         }
         this.nave.actualizarEstdo();
+        for (Imagen temp : imagenes) {
+            if(temp instanceof Enemigo){
+                ((Enemigo) temp).actualizarPosicion();
+            }
+        }
     }
 
     @Override
@@ -57,6 +76,11 @@ public class Jugando extends Estado implements MetodosEstado {
             actu.renderizar(g);
         }
         this.nave.renderizar(g);
+        for (Imagen temp : imagenes) {
+            if(temp instanceof Enemigo){
+                ((Enemigo) temp).renderizar(g);
+            }
+        }
     }
 
     @Override

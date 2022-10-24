@@ -17,17 +17,17 @@ import java.util.ArrayList;
  */
 public class Nave extends Imagen implements Config {
     
-    private ArrayList<Imagen> posiblesNaves;
-    private int naveUsada = 0;
-    private boolean up, down, left, right;
-    private float velocidad = 2.0f;
-    private int direccionJugador = -1;
-    private boolean moviendose = false;
-    private int ultimaAni = 0;
-    private int cambioAni = 30, velocidadAni = 0;
-    private ArrayList<Disparo> disparos;
-    private ArrayList<Image> movAni;
-    SClip audio = new SClip("src/recursos/008842292_prev.wav");
+    protected ArrayList<Imagen> posiblesNaves;
+    protected int naveUsada = 0;
+    protected boolean up, down, left, right;
+    protected float velocidad = 2.0f;
+    protected int direccionJugador = -1;
+    protected boolean moviendose = false;
+    protected int ultimaAni = 0;
+    protected int cambioAni = 30, velocidadAni = 0;
+    protected ArrayList<Disparo> disparos;
+    protected ArrayList<Image> movAni;
+    protected SClip audio = new SClip("src/recursos/008842292_prev.wav");
     
     public Nave(boolean maquina, float x, float y, int ancho, int alto) {
         super(maquina, x, y, ancho, alto);
@@ -55,7 +55,11 @@ public class Nave extends Imagen implements Config {
      */
     public void disparar() {
         this.audio.play();
-        getDisparos().add(new Disparo(false, getX(), getY()-32, 128, 128, 1));
+        int mov = 1;
+        if (this.isMaquina()){
+            mov = -1;
+        }
+        getDisparos().add(new Disparo(false, getX(), getY()-32, 128, 128, mov));
     }
     
     /**
@@ -100,8 +104,7 @@ public class Nave extends Imagen implements Config {
      */
     @Override
     public void renderizar(Graphics g) {
-        Toolkit t = Toolkit.getDefaultToolkit();
-        Image imagen = t.getImage(getPosiblesNaves().get(getNaveUsada()).getRuta());
+        Image imagen = this.definirNave();
         g.drawImage(movAni.get(ultimaAni), (int) getX()-35, (int) getY(),64, 64, null);
         g.drawImage(imagen, (int) getX(), (int) getY(), 64, 64, null);
         for(Disparo temp : getDisparos()) {
@@ -109,15 +112,27 @@ public class Nave extends Imagen implements Config {
         }
     }
     
+    public Image definirNave(){
+        Toolkit t = Toolkit.getDefaultToolkit();
+        Image temp;
+        if(!isMaquina()){
+            temp = t.getImage(this.getPosiblesNaves().get(0).getRuta());
+        }else{
+            temp = t.getImage(getPosiblesNaves().get(4).getRuta());
+       
+        }
+        return temp;
+    }
+    
     /**
      * Mete las imagenes de las naves a su respectivo arraylist
      */
     public void sacarImagenes() {
         getPosiblesNaves().add(new Imagen("src/recursos/Ship1.png", false));
-        getPosiblesNaves().add(new Imagen("src/recursos/Ship2.png", false));
-        getPosiblesNaves().add(new Imagen("src/recursos/Ship4.png", false));
-        getPosiblesNaves().add(new Imagen("src/recursos/Ship5.png", false));
-        getPosiblesNaves().add(new Imagen("src/recursos/Ship6.png", false));
+        getPosiblesNaves().add(new Imagen("src/recursos/Ship2.png", true));
+        getPosiblesNaves().add(new Imagen("src/recursos/Ship4.png", true));
+        getPosiblesNaves().add(new Imagen("src/recursos/Ship5.png", true));
+        getPosiblesNaves().add(new Imagen("src/recursos/Ship6.png", true));
     }
     
     /**
