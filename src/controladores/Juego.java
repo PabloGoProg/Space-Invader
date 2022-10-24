@@ -19,6 +19,7 @@ public class Juego implements Runnable {
     private Thread hiloJuego;
     private int FPS = 120;  // Cantidad de fps en el juego
     private int UPS = 200;
+    SClip soundtrack = new SClip("src/recursos/soundtrack.wav");
     
     private Jugando jugando;
     private Menu menu;
@@ -64,6 +65,7 @@ public class Juego implements Runnable {
     public void actualizar() {
         switch (EstadosDeJuego.estadoActual) {
             case MENU:
+                this.soundtrack.loop();
                 getMenu().actualizar();
                 break;
             case JUGANDO:
