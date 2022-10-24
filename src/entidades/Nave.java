@@ -120,8 +120,6 @@ public class Nave extends Imagen implements Config {
         for(Disparo temp : getDisparos()) {
             temp.renderizar(g);
         }
-        g.setColor(Color.WHITE);
-        g.drawRect((int) hitbox.x, (int) hitbox.y, (int) hitbox.width, (int) hitbox.height);
     }
     
     public Image definirNave(){
@@ -135,6 +133,7 @@ public class Nave extends Imagen implements Config {
         }
         return temp;
     }
+    
     
     /**
      * Mete las imagenes de las naves a su respectivo arraylist

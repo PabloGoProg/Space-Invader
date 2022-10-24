@@ -4,10 +4,8 @@
  */
 package entidades;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -17,6 +15,7 @@ import java.awt.geom.Rectangle2D;
 public class Enemigo extends Nave implements Config {
     
     private Rectangle2D.Float hitbox;
+    private boolean viva = true;
 
     public Enemigo(boolean maquina, float x, float y, int ancho, int alto) {
         super(maquina, x, y, ancho, alto);
@@ -31,12 +30,10 @@ public class Enemigo extends Nave implements Config {
     public void renderizar(Graphics g) {
         Image imagen = super.definirNave();
 //        g.drawImage(movAni.get(ultimaAni), (int) getX()-35, (int) getY(),64, 64, null);
-        g.drawImage(imagen, (int) getX(), (int) getY(), 64, 64, null);
+        if(isViva()) g.drawImage(imagen, (int) getX(), (int) getY(), 64, 64, null);
 //        for(Disparo temp : getDisparos()) {
 //            temp.renderizar(g);
 //        }
-        g.setColor(Color.WHITE);
-        g.drawRect((int) hitbox.x, (int) hitbox.y, (int) hitbox.width, (int) hitbox.height);
     }
     @Override
     public void actualizarEstdo() {
@@ -72,8 +69,37 @@ public class Enemigo extends Nave implements Config {
         if(this.getX() < 0) {
             this.setX(Config.WIDTH + 840);
             this.setY(Math.round(Math.random()*540+5));
+            this.setViva(true);
         }
         this.setX(this.getX() - 1.5f);
+    }
+
+    /**
+     * @return the hitbox
+     */
+    public Rectangle2D.Float getHitbox() {
+        return hitbox;
+    }
+
+    /**
+     * @param hitbox the hitbox to set
+     */
+    public void setHitbox(Rectangle2D.Float hitbox) {
+        this.hitbox = hitbox;
+    }
+
+    /**
+     * @return the viva
+     */
+    public boolean isViva() {
+        return viva;
+    }
+
+    /**
+     * @param viva the viva to set
+     */
+    public void setViva(boolean viva) {
+        this.viva = viva;
     }
     
 }
