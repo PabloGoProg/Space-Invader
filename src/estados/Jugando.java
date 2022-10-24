@@ -61,7 +61,7 @@ public class Jugando extends Estado implements MetodosEstado {
         this.nave.actualizarEstdo();
         for (Imagen temp : imagenes) {
             if(temp instanceof Enemigo){
-                ((Enemigo) temp).actualizarPosicion();
+                ((Enemigo) temp).actualizarEstdo();
             }
         }
     }

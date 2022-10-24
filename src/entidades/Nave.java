@@ -6,9 +6,11 @@ package entidades;
 
 import static animaciones.constantes.Direccion.*;
 import controladores.SClip;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 public class Nave extends Imagen implements Config {
     
     protected ArrayList<Imagen> posiblesNaves;
+    protected Rectangle2D.Float hitbox;
     protected int naveUsada = 0;
     protected boolean up, down, left, right;
     protected float velocidad = 2.0f;
@@ -31,6 +34,7 @@ public class Nave extends Imagen implements Config {
     
     public Nave(boolean maquina, float x, float y, int ancho, int alto) {
         super(maquina, x, y, ancho, alto);
+        this.hitbox = new Rectangle2D.Float(this.getX(), this.getY()+13, this.getAncho(), this.getAlto()-32);
         this.posiblesNaves = new ArrayList<>();
         this.disparos = new ArrayList<>();
         this.movAni = new ArrayList<>();
@@ -45,6 +49,7 @@ public class Nave extends Imagen implements Config {
         actualizarPosicion();
         actualizarDiapros();
         actualizarAnimacion();
+        actualizarHitbox();
         for(Disparo cur : disparos) {
             cur.actualizarEstado();
         }
@@ -60,6 +65,11 @@ public class Nave extends Imagen implements Config {
             mov = -1;
         }
         getDisparos().add(new Disparo(false, getX(), getY()-32, 128, 128, mov));
+    }
+    
+    public void actualizarHitbox() {
+        hitbox.x = this.getX();
+        hitbox.y = this.getY()+13;
     }
     
     /**
@@ -110,6 +120,8 @@ public class Nave extends Imagen implements Config {
         for(Disparo temp : getDisparos()) {
             temp.renderizar(g);
         }
+        g.setColor(Color.WHITE);
+        g.drawRect((int) hitbox.x, (int) hitbox.y, (int) hitbox.width, (int) hitbox.height);
     }
     
     public Image definirNave(){

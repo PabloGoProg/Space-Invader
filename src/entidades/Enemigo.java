@@ -4,19 +4,23 @@
  */
 package entidades;
 
-import static animaciones.constantes.Direccion.DERECHA;
-import static animaciones.constantes.Direccion.IZQUIERDA;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
  * @author 57301
  */
 public class Enemigo extends Nave implements Config {
+    
+    private Rectangle2D.Float hitbox;
 
     public Enemigo(boolean maquina, float x, float y, int ancho, int alto) {
         super(maquina, x, y, ancho, alto);
+        this.hitbox = new Rectangle2D.Float(this.getX(), this.getY()+20, this.getAncho(), this.getAlto()-13);
     }
 
     /**
@@ -31,15 +35,24 @@ public class Enemigo extends Nave implements Config {
 //        for(Disparo temp : getDisparos()) {
 //            temp.renderizar(g);
 //        }
+        g.setColor(Color.WHITE);
+        g.drawRect((int) hitbox.x, (int) hitbox.y, (int) hitbox.width, (int) hitbox.height);
     }
     @Override
     public void actualizarEstdo() {
         actualizarPosicion();
         actualizarDiapros();
         actualizarAnimacion();
+        actualizarHitbox();
         for(Disparo cur : disparos) {
             cur.actualizarEstado();
         }
+    }
+    
+    @Override
+    public void actualizarHitbox() {
+        hitbox.x = this.getX();
+        hitbox.y = this.getY()+13;
     }
     
     @Override
