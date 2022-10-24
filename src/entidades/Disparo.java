@@ -48,9 +48,7 @@ public class Disparo extends Imagen implements Config{
     
     @Override
     public void renderizar(Graphics g) {
-        g.drawImage(imagenesAni.get(ultimaAni), (int) this.getX(), (int) this.getY(), 128, 128, null);
-        g.setColor(Color.WHITE);
-        g.drawRect((int) hitbox.x, (int) hitbox.y, (int) hitbox.width, (int) hitbox.height);
+        g.drawImage(getImagenesAni().get(getUltimaAni()), (int) this.getX(), (int) this.getY(), 128, 128, null);
     }
     
     /**
@@ -63,25 +61,25 @@ public class Disparo extends Imagen implements Config{
         } 
         
         this.x += getDireccion() * getVelocidadProyectil();
-        hitbox.x = this.getX()+45;
+        hitbox.x = this.getX()+38;
         hitbox.y = this.getY()+57;
     }
     
     public void imagenesAnimacion() {
         Toolkit t = Toolkit.getDefaultToolkit();
-        imagenesAni.add(t.getImage("src/disparoNave/disp1.png"));
-        imagenesAni.add(t.getImage("src/disparoNave/disp2.png"));
-        imagenesAni.add(t.getImage("src/disparoNave/disp3.png"));
-        imagenesAni.add(t.getImage("src/disparoNave/disp4.png"));
+        getImagenesAni().add(t.getImage("src/disparoNave/disp1.png"));
+        getImagenesAni().add(t.getImage("src/disparoNave/disp2.png"));
+        getImagenesAni().add(t.getImage("src/disparoNave/disp3.png"));
+        getImagenesAni().add(t.getImage("src/disparoNave/disp4.png"));
     }
     
     public void actualizarAnimacion() {
-        if(ultimaAni < imagenesAni.size()-1) {
-            velocidadAni++;
-            if(velocidadAni >= cambioAni) {
-                ultimaAni++;
-                velocidadAni = 0;
-                cambioAni += 5;
+        if(getUltimaAni() < getImagenesAni().size()-1) {
+            setVelocidadAni(getVelocidadAni() + 1);
+            if(getVelocidadAni() >= getCambioAni()) {
+                setUltimaAni(getUltimaAni() + 1);
+                setVelocidadAni(0);
+                setCambioAni(getCambioAni() + 5);
             }
         }
     }
@@ -141,6 +139,62 @@ public class Disparo extends Imagen implements Config{
      */
     public void setDireccion(int direccion) {
         this.direccion = direccion;
+    }
+
+    /**
+     * @return the imagenesAni
+     */
+    public ArrayList<Image> getImagenesAni() {
+        return imagenesAni;
+    }
+
+    /**
+     * @param imagenesAni the imagenesAni to set
+     */
+    public void setImagenesAni(ArrayList<Image> imagenesAni) {
+        this.imagenesAni = imagenesAni;
+    }
+
+    /**
+     * @return the ultimaAni
+     */
+    public int getUltimaAni() {
+        return ultimaAni;
+    }
+
+    /**
+     * @param ultimaAni the ultimaAni to set
+     */
+    public void setUltimaAni(int ultimaAni) {
+        this.ultimaAni = ultimaAni;
+    }
+
+    /**
+     * @return the cambioAni
+     */
+    public int getCambioAni() {
+        return cambioAni;
+    }
+
+    /**
+     * @param cambioAni the cambioAni to set
+     */
+    public void setCambioAni(int cambioAni) {
+        this.cambioAni = cambioAni;
+    }
+
+    /**
+     * @return the velocidadAni
+     */
+    public int getVelocidadAni() {
+        return velocidadAni;
+    }
+
+    /**
+     * @param velocidadAni the velocidadAni to set
+     */
+    public void setVelocidadAni(int velocidadAni) {
+        this.velocidadAni = velocidadAni;
     }
     
 }
