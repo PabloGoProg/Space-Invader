@@ -5,6 +5,7 @@
 package entidades;
 
 import static animaciones.constantes.Direccion.*;
+import controladores.SClip;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -26,6 +27,7 @@ public class Nave extends Imagen implements Config {
     private int cambioAni = 30, velocidadAni = 0;
     private ArrayList<Disparo> disparos;
     private ArrayList<Image> movAni;
+    SClip audio = new SClip("src/recursos/008842292_prev.wav");
     
     public Nave(boolean maquina, float x, float y, int ancho, int alto) {
         super(maquina, x, y, ancho, alto);
@@ -52,6 +54,7 @@ public class Nave extends Imagen implements Config {
      * Realiza la acción de disparar, agregando un nuevo proyectil al arreglo
      */
     public void disparar() {
+        this.audio.play();
         getDisparos().add(new Disparo(false, getX(), getY()-32, 128, 128, 1));
     }
     
