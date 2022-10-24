@@ -29,7 +29,6 @@ public class Jugando extends Estado implements MetodosEstado {
         this.imagenes = new ArrayList<>();
         this.estrellas = new ArrayList<>();
         desplegarComponentes();
-        
     }
     
     /**

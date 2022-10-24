@@ -4,10 +4,16 @@
  */
 package controladores;
 
+import entidades.Config;
 import estados.EstadosDeJuego;
 import estados.Jugando;
 import estados.Menu;
+import estados.MetodosEstado;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Icon;
+import javax.swing.JButton;
 
 /**
  *
@@ -20,6 +26,7 @@ public class Juego implements Runnable {
     private int FPS = 120;  // Cantidad de fps en el juego
     private int UPS = 200;
     SClip soundtrack = new SClip("src/recursos/soundtrack.wav");
+    JButton play;
     
     private Jugando jugando;
     private Menu menu;
@@ -74,6 +81,8 @@ public class Juego implements Runnable {
               
         }
     }
+    
+  
     
      /**
      * Renderiza al jugador

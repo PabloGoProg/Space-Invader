@@ -5,10 +5,15 @@
 package controladores;
 
 import entidades.Config;
+import estados.EstadosDeJuego;
+import estados.MetodosEstado;
 import inputs.InputTeclado;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
@@ -18,6 +23,7 @@ import javax.swing.JPanel;
 public class PanelJuego extends JPanel {
 
     private Juego juego;
+    private JButton play;
     
     public PanelJuego(Juego juego) {
         this.juego = juego;
@@ -46,7 +52,16 @@ public class PanelJuego extends JPanel {
         juego.renderizar(g);
     }
     
+    
     public Juego getJuego() {
         return juego;
+    }
+
+    public void setPlay(JButton play) {
+        this.play = play;
+    }
+
+    public JButton getPlay() {
+        return play;
     }
 }
