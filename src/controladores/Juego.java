@@ -25,6 +25,7 @@ public class Juego implements Runnable {
     private Thread hiloJuego;
     private int FPS = 120;  // Cantidad de fps en el juego
     private int UPS = 200;
+    private boolean playing;
     
     JButton play;
     
@@ -33,6 +34,7 @@ public class Juego implements Runnable {
 
     public Juego() {
         inicializarPaneles();
+        this.playing = true;
         this.panel = new PanelJuego(this);
         this.ventana = new VentanaPrincipal(getPanel());
         this.panel.requestFocus();
@@ -52,21 +54,20 @@ public class Juego implements Runnable {
         long tiempoPrevio = System.nanoTime();
         
         double deltaActu = 0;
-
-        while(true) {
-            actual = System.nanoTime();
-            long tiempoActual = System.nanoTime();
-            deltaActu += (tiempoActual - tiempoPrevio) / tiempoPorActu;
-            tiempoPrevio = tiempoActual;
-            if(deltaActu >= 1) {
-                actualizar();
-                deltaActu --;
+            while(playing) {
+                actual = System.nanoTime();
+                long tiempoActual = System.nanoTime();
+                deltaActu += (tiempoActual - tiempoPrevio) / tiempoPorActu;
+                tiempoPrevio = tiempoActual;
+                if(deltaActu >= 1) {
+                    actualizar();
+                    deltaActu --;
+                }
+                if(actual - ultimoFrame >= tiempoPorFrame) {
+                    getPanel().repaint();
+                    ultimoFrame = actual;
+                }
             }
-            if(actual - ultimoFrame >= tiempoPorFrame) {
-                getPanel().repaint();
-                ultimoFrame = actual;
-            }
-        }
     }
     
     public void actualizar() {
@@ -111,7 +112,15 @@ public class Juego implements Runnable {
      * Imprime los componentes queridos dentro del frame
      */
     private void inicializarPaneles() {
+        this.setMenu(new Menu(this));
         this.setJugando(new Jugando(this));
+    }
+    
+    public void reiniciarJuego(){
+        this.setJugando(new Jugando(this));
+    }
+    
+    public void pausar(){
         this.setMenu(new Menu(this));
     }
 
@@ -212,4 +221,17 @@ public class Juego implements Runnable {
     public void setUPS(int UPS) {
         this.UPS = UPS;
     }
+
+    public void setPlaying(boolean playing) {
+        this.playing = playing;
+    }
+
+    public boolean isPlaying() {
+        return playing;
+    }
+    
+
+    
+    
+    
 }

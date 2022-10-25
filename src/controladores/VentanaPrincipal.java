@@ -13,7 +13,7 @@ public class VentanaPrincipal {
     private JFrame ventana;
 
     public VentanaPrincipal(PanelJuego panel) {
-        this.ventana = new JFrame();
+        this.ventana = new JFrame("SPICY SHIPS");
         
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.add(panel); 

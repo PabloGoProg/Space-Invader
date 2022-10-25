@@ -7,8 +7,11 @@ package inputs;
 import controladores.PanelJuego;
 import controladores.SClip;
 import estados.EstadosDeJuego;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +20,7 @@ import java.awt.event.KeyListener;
 public class InputTeclado implements KeyListener {
     private PanelJuego panelJuego;
     SClip mario = new SClip("src/recursos/mario.wav");
+    private Graphics g;
 
     public InputTeclado(PanelJuego panelJuego) {
         this.panelJuego = panelJuego;
@@ -72,6 +76,16 @@ public class InputTeclado implements KeyListener {
                 this.panelJuego.getMenuSound().stop();
                 this.mario.play();
                 break;
+            case KeyEvent.VK_R:
+                this.panelJuego.getJuego().reiniciarJuego();
+                this.panelJuego.getJuego().getMenu().actualizar();
+                break;
+            case KeyEvent.VK_P:
+                if(this.panelJuego.getJuego().isPlaying()){
+                    this.panelJuego.getJuego().setPlaying(false);
+                }else{
+                    
+                }
         }
     }
 }
