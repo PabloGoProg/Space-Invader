@@ -85,6 +85,7 @@ public class Nave extends Imagen implements Config {
             }
         }
         if(i < getDisparos().size()) getDisparos().remove(i);
+        
     }
     
     /**

@@ -60,6 +60,7 @@ public class Jugando extends Estado implements MetodosEstado {
         for (Enemigo temp : getEnemigos()) {
             temp.actualizarEstdo();
         }  
+        
         validarColDispario();
     }
 
