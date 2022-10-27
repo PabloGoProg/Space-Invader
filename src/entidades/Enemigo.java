@@ -6,6 +6,7 @@ package entidades;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -15,11 +16,16 @@ import java.awt.geom.Rectangle2D;
 public class Enemigo extends Nave implements Config {
     
     private Rectangle2D.Float hitbox;
+    private Disparo disparo;
     private boolean viva = true;
+    private Image propulsor;
 
     public Enemigo(boolean maquina, float x, float y, int ancho, int alto) {
         super(maquina, x, y, ancho, alto);
         this.hitbox = new Rectangle2D.Float(this.getX(), this.getY()+20, this.getAncho(), this.getAlto()-13);
+        this.disparo = new Disparo(true, getX(), getY(), 64, 64, -1);
+        disparo.setEnRango(false);
+        sacarImgAni();
     }
 
     /**
@@ -29,18 +35,20 @@ public class Enemigo extends Nave implements Config {
     @Override
     public void renderizar(Graphics g) {
         Image imagen = super.definirNave();
-        if(isViva()) g.drawImage(imagen, (int) getX(), (int) getY(), 64, 64, null);
+        this.getDisparo().renderizar(g);
+        if(isViva()) {
+           g.drawImage(getPropulsor(), (int) getX(), (int) getY()-32, 128, 128, null);
+           g.drawImage(imagen, (int) getX(), (int) getY(), 64, 64, null);
+        }
     }
     
     @Override
     public void actualizarEstdo() {
         actualizarPosicion();
-        actualizarDiapros();
-        actualizarAnimacion();
         actualizarHitbox();
-        for(Disparo cur : disparos) {
-            cur.actualizarEstado();
-        }
+        this.getDisparo().actualizarEstado();
+        System.out.println(disparo.getVelocidadProyectil());
+        disparar();
     }
     
     @Override
@@ -71,6 +79,19 @@ public class Enemigo extends Nave implements Config {
         this.setX(this.getX() - 1.5f);
     }
 
+    public void sacarImgAni() {
+        Toolkit t = Toolkit.getDefaultToolkit();
+        setPropulsor(t.getImage("src/recursos/propEnemigo.png"));
+    }
+    
+    @Override
+    public void disparar() {
+        this.getDisparo().setVelocidadProyectil(3.5f);
+        if(!this.getDisparo().isEnRango() && isViva()) {
+            this.setDisparo(new Disparo(true, this.getX(), this.getY()-32, 64, 64, -1));
+        }
+    }
+    
     /**
      * @return the hitbox
      */
@@ -97,6 +118,34 @@ public class Enemigo extends Nave implements Config {
      */
     public void setViva(boolean viva) {
         this.viva = viva;
+    }
+
+    /**
+     * @return the disparo
+     */
+    public Disparo getDisparo() {
+        return disparo;
+    }
+
+    /**
+     * @param disparo the disparo to set
+     */
+    public void setDisparo(Disparo disparo) {
+        this.disparo = disparo;
+    }
+
+    /**
+     * @return the propulsor
+     */
+    public Image getPropulsor() {
+        return propulsor;
+    }
+
+    /**
+     * @param propulsor the propulsor to set
+     */
+    public void setPropulsor(Image propulsor) {
+        this.propulsor = propulsor;
     }
     
 }

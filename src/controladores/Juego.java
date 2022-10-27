@@ -45,7 +45,6 @@ public class Juego implements Runnable {
         long tiempoPrevio = System.nanoTime();
         double deltaActu = 0;
             while(playing) {
-                System.err.println("Estoy corriendo");
                 actual = System.nanoTime();
                 long tiempoActual = System.nanoTime();
                 deltaActu += (tiempoActual - tiempoPrevio) / tiempoPorActu;

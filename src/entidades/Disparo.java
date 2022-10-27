@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Disparo extends Imagen implements Config{
     private Rectangle2D.Float hitbox;
     private float velocidadProyectil = 2.0f;
-    private int direccion = -1;
+    private int direccion;
     private boolean enRango = true;
     private ArrayList<Image> imagenesAni;
     private int ultimaAni = 0;
@@ -55,11 +55,11 @@ public class Disparo extends Imagen implements Config{
      */
     @Override
     public void actualizarPosicion() {
-        if(this.getX() > Config.WIDTH) {
+        if(this.getX() > Config.WIDTH || this.getX() < 0-this.getAlto()) {
             setEnRango(false);
         } 
         
-        this.x += getDireccion() * getVelocidadProyectil();
+        this.x += (getDireccion() * getVelocidadProyectil());
         hitbox.x = this.getX()+38;
         hitbox.y = this.getY()+57;
     }
