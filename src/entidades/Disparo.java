@@ -4,7 +4,6 @@
  */
 package entidades;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -37,8 +36,8 @@ public class Disparo extends Imagen implements Config{
         super(maquina, x, y, ancho, alto);
         hitbox = new Rectangle2D.Float(this.getX(), this.getY(), 16, 16);
         this.imagenesAni = new ArrayList<>();
-        imagenesAnimacion();
         this.direccion = direccion;
+        imagenesAnimacion();
     }
     
     public void actualizarEstado() {
@@ -73,6 +72,9 @@ public class Disparo extends Imagen implements Config{
         getImagenesAni().add(t.getImage("src/disparoNave/disp4.png"));
     }
     
+    /**
+     * Se encarga de animar el disparo desde el momento que sale de la nave
+     */
     public void actualizarAnimacion() {
         if(getUltimaAni() < getImagenesAni().size()-1) {
             setVelocidadAni(getVelocidadAni() + 1);

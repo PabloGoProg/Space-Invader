@@ -10,8 +10,12 @@ package estados;
  */
 public enum EstadosDeJuego {
     
-    JUGANDO, MENU, PAUSA, MUERTE;
+    JUGANDO, MENU;
     
+    /**
+     * Se encarga de definir el estado en el que se encuentra
+     * el programa en tiempo de ejecucuion
+     */
     public static EstadosDeJuego estadoActual = MENU;
     
 }

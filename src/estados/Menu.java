@@ -8,14 +8,10 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import controladores.Juego;
 import controladores.SClip;
-import entidades.Config;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
 
 /**
  *
@@ -23,6 +19,7 @@ import javax.swing.JButton;
  */
 public class Menu extends Estado implements MetodosEstado {
     
+    // Audio de menu
     SClip soundtrack = new SClip("src/recursos/soundtrack.wav");
     
     public Menu(Juego juego) {
@@ -41,13 +38,10 @@ public class Menu extends Estado implements MetodosEstado {
         Toolkit t = Toolkit.getDefaultToolkit();
         Image img = t.getImage("src/recursos/6356f81442421.jpg");
         g.drawImage(img, 0, 0, MetodosEstado.WIDTH, MetodosEstado.HEIGH, null);
-        //Boton play
-//        Image btnPlay = t.getImage("src/recursos/botonPlay.png");
-//        g.drawImage(btnPlay, (MetodosEstado.WIDTH/2)-80, (MetodosEstado.HEIGH/2)-100, 150,150,null);
-          g.setFont(new Font( "Tahoma", Font.BOLD, 46 ) );
-          Color c = new Color(174,149,179);
-          g.setColor(c);
-          g.drawString("PRESS ENTER TO PLAY", (MetodosEstado.WIDTH/2)-250, (MetodosEstado.HEIGH/2)-100);
+        g.setFont(new Font( "Tahoma", Font.BOLD, 46 ) );
+        Color c = new Color(174,149,179);
+        g.setColor(c);
+        g.drawString("PRESS ENTER TO PLAY", (MetodosEstado.WIDTH/2)-250, (MetodosEstado.HEIGH/2)-100);
     }
 
     @Override
@@ -62,11 +56,7 @@ public class Menu extends Estado implements MetodosEstado {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_A:
-                System.out.println("Funciona");
-                break;
-        }
+        
     }
     
 }    

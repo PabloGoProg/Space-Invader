@@ -6,8 +6,7 @@ package inputs;
 
 import controladores.PanelJuego;
 import controladores.SClip;
-import estados.EstadosDeJuego;
-import java.awt.Graphics;
+import estados.EstadosDeJuego; 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -75,20 +74,19 @@ public class InputTeclado implements KeyListener {
                 }
                 break;
             case KeyEvent.VK_ENTER:
-                EstadosDeJuego.estadoActual = EstadosDeJuego.JUGANDO;
-                this.panelJuego.getMenuSound().stop();
-                this.mario.play();
+                if(EstadosDeJuego.estadoActual == EstadosDeJuego.MENU) {
+                    EstadosDeJuego.estadoActual = EstadosDeJuego.JUGANDO;
+                    this.panelJuego.getMenuSound().stop();
+                    this.mario.play();
+                }
                 break;
             case KeyEvent.VK_R:
                 this.panelJuego.getJuego().reiniciarJuego();
                 this.panelJuego.getJuego().getMenu().actualizar();
                 break;
             case KeyEvent.VK_P:
-                if(this.panelJuego.getJuego().isPlaying()){
-                    this.panelJuego.getJuego().setPlaying(false);
-                }else{
-                    
-                }
+                this.panelJuego.getJuego().pausar();
+                break;
         }
     }
 }

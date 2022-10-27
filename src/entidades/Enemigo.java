@@ -29,12 +29,9 @@ public class Enemigo extends Nave implements Config {
     @Override
     public void renderizar(Graphics g) {
         Image imagen = super.definirNave();
-//        g.drawImage(movAni.get(ultimaAni), (int) getX()-35, (int) getY(),64, 64, null);
         if(isViva()) g.drawImage(imagen, (int) getX(), (int) getY(), 64, 64, null);
-//        for(Disparo temp : getDisparos()) {
-//            temp.renderizar(g);
-//        }
     }
+    
     @Override
     public void actualizarEstdo() {
         actualizarPosicion();

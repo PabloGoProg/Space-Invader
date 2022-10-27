@@ -6,7 +6,6 @@ package entidades;
 
 import static animaciones.constantes.Direccion.*;
 import controladores.SClip;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -30,7 +29,7 @@ public class Nave extends Imagen implements Config {
     protected int cambioAni = 30, velocidadAni = 0;
     protected ArrayList<Disparo> disparos;
     protected ArrayList<Image> movAni;
-    protected SClip audio = new SClip("src/recursos/008842292_prev.wav");
+    protected SClip disparo = new SClip("src/recursos/008842292_prev.wav");
     
     public Nave(boolean maquina, float x, float y, int ancho, int alto) {
         super(maquina, x, y, ancho, alto);
@@ -59,7 +58,7 @@ public class Nave extends Imagen implements Config {
      * Realiza la acción de disparar, agregando un nuevo proyectil al arreglo
      */
     public void disparar() {
-        this.audio.play();
+        this.disparo.play();
         int mov = 1;
         if (this.isMaquina()){
             mov = -1;
@@ -67,6 +66,9 @@ public class Nave extends Imagen implements Config {
         getDisparos().add(new Disparo(false, getX(), getY()-32, 128, 128, mov));
     }
     
+    /**
+     * Mueve la hitbox del personaje con respecto a sus coordenadas x, y
+     */
     public void actualizarHitbox() {
         hitbox.x = this.getX();
         hitbox.y = this.getY()+13;
@@ -85,7 +87,6 @@ public class Nave extends Imagen implements Config {
             }
         }
         if(i < getDisparos().size()) getDisparos().remove(i);
-        
     }
     
     /**
@@ -123,6 +124,11 @@ public class Nave extends Imagen implements Config {
         }
     }
     
+    /**
+     * Define la imagen que tendra la nave, dependiendo de si esta es 
+     * controlada por la maquina o no
+     * @return 
+     */
     public Image definirNave(){
         Toolkit t = Toolkit.getDefaultToolkit();
         Image temp;
@@ -134,7 +140,6 @@ public class Nave extends Imagen implements Config {
         }
         return temp;
     }
-    
     
     /**
      * Mete las imagenes de las naves a su respectivo arraylist
@@ -170,6 +175,9 @@ public class Nave extends Imagen implements Config {
         }
     }
     
+    /**
+     * Reconoce que el usuario se mueve a la derecha para realizar la animacion de aceleracion
+     */
     public void acelerar() {
         if(velocidadAni < cambioAni) {
             velocidadAni++;
@@ -180,6 +188,11 @@ public class Nave extends Imagen implements Config {
         }
     }
     
+    
+    /**
+     * Detecta que se deja de mover a la derecha o esta quieto para 
+     * invertir la animacion
+     */
     public void desacelerar() {
         if(velocidadAni > 0) {
             velocidadAni--;

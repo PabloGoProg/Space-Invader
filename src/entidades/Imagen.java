@@ -89,9 +89,4 @@ public class Imagen {
     public void setHitbox(Rectangle2D.Float hitbox) {
         this.hitbox = hitbox;
     }
-
-    public void setViva(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }

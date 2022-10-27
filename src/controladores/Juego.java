@@ -4,16 +4,10 @@
  */
 package controladores;
 
-import entidades.Config;
 import estados.EstadosDeJuego;
 import estados.Jugando;
 import estados.Menu;
-import estados.MetodosEstado;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Icon;
-import javax.swing.JButton;
 
 /**
  *
@@ -24,11 +18,8 @@ public class Juego implements Runnable {
     private PanelJuego panel;
     private Thread hiloJuego;
     private int FPS = 120;  // Cantidad de fps en el juego
-    private int UPS = 200;
+    private int UPS = 200;  // Actualizaciones por segundo
     private boolean playing;
-    
-    JButton play;
-    
     private Jugando jugando;
     private Menu menu;
 
@@ -52,9 +43,9 @@ public class Juego implements Runnable {
         long ultimoFrame = System.nanoTime();
         long actual = System.nanoTime();
         long tiempoPrevio = System.nanoTime();
-        
         double deltaActu = 0;
             while(playing) {
+                System.err.println("Estoy corriendo");
                 actual = System.nanoTime();
                 long tiempoActual = System.nanoTime();
                 deltaActu += (tiempoActual - tiempoPrevio) / tiempoPorActu;
@@ -81,8 +72,6 @@ public class Juego implements Runnable {
               
         }
     }
-    
-  
     
      /**
      * Renderiza al jugador
@@ -120,8 +109,13 @@ public class Juego implements Runnable {
         this.setJugando(new Jugando(this));
     }
     
-    public void pausar(){
-        this.setMenu(new Menu(this));
+    public void pausar() {
+        if(isPlaying()) {
+            setPlaying(false);
+            this.panel.getMenuSound().stop();
+        } else {
+            setPlaying(true);
+        }
     }
 
     /**

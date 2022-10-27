@@ -14,6 +14,14 @@ public interface Config {
     public final int WIDTH = 1280;
     public final int HEIGH = 680;
     
+    /**
+     * Renderiza en pantalla el elemento con sus actualizaciones
+     * @param g 
+     */
     public void renderizar(Graphics g);
+    
+    /**
+     * Actualiza las caracteristicas y variables de cada elemento del juego
+     */
     public void actualizarPosicion();
 }

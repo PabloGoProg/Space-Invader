@@ -9,7 +9,6 @@ import entidades.Config;
 import entidades.Disparo;
 import entidades.Enemigo;
 import entidades.Estrella;
-import entidades.Imagen;
 import entidades.Nave;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -45,6 +44,9 @@ public class Jugando extends Estado implements MetodosEstado {
         this.crearEnemigos();
     }
     
+    /**
+     * Genera las naves enemigas dentro de la pantalla
+     */
     public void crearEnemigos(){
         for (int i = 0; i < 5; i++) {
             this.getEnemigos().add(new Enemigo(true, Math.round(Math.random()*Config.WIDTH+1100),Math.round(Math.random()*540+5) , 48, 48));
@@ -60,7 +62,6 @@ public class Jugando extends Estado implements MetodosEstado {
         for (Enemigo temp : getEnemigos()) {
             temp.actualizarEstdo();
         }  
-        
         validarColDispario();
     }
 
@@ -75,6 +76,9 @@ public class Jugando extends Estado implements MetodosEstado {
         }
     }
     
+    /**
+     * Valida que los disparos inpacten con agfluna nave enemiga en su trayecto
+     */
     public void validarColDispario() {
         for(Disparo disp : getNave().getDisparos()) {
             for(Enemigo enemigo : getEnemigos()) {
@@ -90,45 +94,15 @@ public class Jugando extends Estado implements MetodosEstado {
     public void keyTyped(KeyEvent e) {
         
     }
-    
 
     @Override
     public void keyReleased(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_W:
-                getNave().setUp(false);
-                break;
-            case KeyEvent.VK_A:
-                getNave().setLeft(false);
-                break;
-            case KeyEvent.VK_S:
-                getNave().setDown(false);
-                break;
-            case KeyEvent.VK_D:
-                getNave().setRight(false);
-                break;
-        }
+        
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_W:
-                getNave().setUp(true);
-                break;
-            case KeyEvent.VK_A:
-                getNave().setLeft(true);
-                break;
-            case KeyEvent.VK_S:
-                getNave().setDown(true);
-                break;
-            case KeyEvent.VK_D:
-                getNave().setRight(true);
-                break;
-            case KeyEvent.VK_L:
-                getNave().disparar();
-                break;
-        }
+        
     }
     
     /**
