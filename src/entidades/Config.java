@@ -12,7 +12,7 @@ import java.awt.Graphics;
  */
 public interface Config {
     public final int WIDTH = 1280;
-    public final int HEIGH = 680;
+    public final int HEIGH = 720;
     
     /**
      * Renderiza en pantalla el elemento con sus actualizaciones

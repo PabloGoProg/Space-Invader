@@ -18,6 +18,7 @@ public class SClip {
 
     private Clip audioClip;
     private AudioInputStream audioStream;
+    private boolean play = true;
 
     //clip method
     public SClip(String path) {
@@ -60,6 +61,17 @@ public class SClip {
 
     public void stop() {
         audioClip.stop();
+    }
+    
+    public void music() {
+        if(play){
+            new Thread( () -> {
+                audioClip.setFramePosition(0);
+                audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+            }){}.start();
+        }else{
+            audioClip.stop();
+        }
     }
 
 }

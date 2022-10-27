@@ -4,6 +4,7 @@
  */
 package entidades;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -17,12 +18,12 @@ public class Enemigo extends Nave implements Config {
     
     private Rectangle2D.Float hitbox;
     private Disparo disparo;
-    private boolean viva = true;
+    private boolean viva = false;
     private Image propulsor;
 
     public Enemigo(boolean maquina, float x, float y, int ancho, int alto) {
         super(maquina, x, y, ancho, alto);
-        this.hitbox = new Rectangle2D.Float(this.getX(), this.getY()+20, this.getAncho(), this.getAlto()-13);
+        this.hitbox = new Rectangle2D.Float(this.getX(), this.getY()+13, 64, 32);
         this.disparo = new Disparo(true, getX(), getY(), 64, 64, -1);
         disparo.setEnRango(false);
         sacarImgAni();
@@ -47,7 +48,6 @@ public class Enemigo extends Nave implements Config {
         actualizarPosicion();
         actualizarHitbox();
         this.getDisparo().actualizarEstado();
-        System.out.println(disparo.getVelocidadProyectil());
         disparar();
     }
     
@@ -86,7 +86,7 @@ public class Enemigo extends Nave implements Config {
     
     @Override
     public void disparar() {
-        this.getDisparo().setVelocidadProyectil(3.5f);
+        this.getDisparo().setVelocidadProyectil(3f);
         if(!this.getDisparo().isEnRango() && isViva()) {
             this.setDisparo(new Disparo(true, this.getX(), this.getY()-32, 64, 64, -1));
         }

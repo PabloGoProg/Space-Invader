@@ -6,6 +6,7 @@ package entidades;
 
 import static animaciones.constantes.Direccion.*;
 import controladores.SClip;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -26,14 +27,16 @@ public class Nave extends Imagen implements Config {
     protected int direccionJugador = -1;
     protected boolean moviendose = false;
     protected int ultimaAni = 0;
-    protected int cambioAni = 30, velocidadAni = 0;
+    protected int cambioAni = 20, velocidadAni = 0;
     protected ArrayList<Disparo> disparos;
     protected ArrayList<Image> movAni;
     protected SClip disparo = new SClip("src/recursos/008842292_prev.wav");
+    protected final int widht = 60;
+    protected final int heigh = 60;
     
     public Nave(boolean maquina, float x, float y, int ancho, int alto) {
         super(maquina, x, y, ancho, alto);
-        this.hitbox = new Rectangle2D.Float(this.getX(), this.getY()+13, this.getAncho(), this.getAlto()-32);
+        this.hitbox = new Rectangle2D.Float(this.getX(), this.getY()+13, this.widht, this.heigh-32);
         this.posiblesNaves = new ArrayList<>();
         this.disparos = new ArrayList<>();
         this.movAni = new ArrayList<>();
@@ -46,12 +49,9 @@ public class Nave extends Imagen implements Config {
      */
     public void actualizarEstdo() {
         actualizarPosicion();
+        actualizarHitbox();
         actualizarDiapros();
         actualizarAnimacion();
-        actualizarHitbox();
-        for(Disparo cur : disparos) {
-            cur.actualizarEstado();
-        }
     }
     
     /**
@@ -83,7 +83,7 @@ public class Nave extends Imagen implements Config {
         for (Disparo actual : getDisparos()) {
             if(!actual.isEnRango()) i = getDisparos().indexOf(actual);
             else {
-                actual.actualizarPosicion();
+                actual.actualizarEstado();
             }
         }
         if(i < getDisparos().size()) getDisparos().remove(i);
