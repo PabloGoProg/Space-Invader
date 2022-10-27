@@ -10,8 +10,6 @@ import estados.EstadosDeJuego;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -19,8 +17,8 @@ import java.util.logging.Logger;
  */
 public class InputTeclado implements KeyListener {
     private PanelJuego panelJuego;
+    private boolean puedeTeclear = true;
     SClip mario = new SClip("src/recursos/mario.wav");
-    private Graphics g;
 
     public InputTeclado(PanelJuego panelJuego) {
         this.panelJuego = panelJuego;
@@ -42,6 +40,9 @@ public class InputTeclado implements KeyListener {
                 break;
             case KeyEvent.VK_S:
                 panelJuego.getJuego().getJugando().getNave().setDown(false);
+                break;
+            case KeyEvent.VK_L:
+                puedeTeclear = true;
                 break;
             case KeyEvent.VK_D:
                 panelJuego.getJuego().getJugando().getNave().setRight(false);
@@ -68,8 +69,10 @@ public class InputTeclado implements KeyListener {
                 panelJuego.getJuego().getJugando().getNave().setMoviendose(true);
                 break;
             case KeyEvent.VK_L:
-                if(EstadosDeJuego.estadoActual == EstadosDeJuego.JUGANDO)
+                if(EstadosDeJuego.estadoActual == EstadosDeJuego.JUGANDO && puedeTeclear) {
                     panelJuego.getJuego().getJugando().getNave().disparar();
+                    puedeTeclear = false;
+                }
                 break;
             case KeyEvent.VK_ENTER:
                 EstadosDeJuego.estadoActual = EstadosDeJuego.JUGANDO;
