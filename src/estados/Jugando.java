@@ -74,15 +74,13 @@ public class Jugando extends Estado implements MetodosEstado {
 
     @Override
     public void actualizarRenderizado(Graphics g) {
-        
-    for (Estrella actu : getEstrellas()) {
-        actu.renderizar(g);
-    }
-    this.getNave().renderizar(g);
-    for (Enemigo temp : getEnemigos()) {
-        temp.renderizar(g);
-    }
-        
+        for (Estrella actu : getEstrellas()) {
+            actu.renderizar(g);
+        }
+        this.getNave().renderizar(g);
+        for (Enemigo temp : getEnemigos()) {
+            temp.renderizar(g);
+        }  
     }
 
     /**
@@ -95,15 +93,6 @@ public class Jugando extends Estado implements MetodosEstado {
                     disp.setEnRango(false);
                     enemigo.setViva(false);
                 }
-            }
-        }
-    }
-
-    public void choque() {
-        for (Enemigo cur : getEnemigos()) {
-            if (cur.getHitbox().intersects(getNave().getHitbox()) && cur.isViva()) {
-                this.juego.reiniciarJuego();
-                
             }
         }
     }
