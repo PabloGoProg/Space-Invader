@@ -33,5 +33,10 @@ public class Estrella extends Imagen implements Config{
         }
         this.setX(this.getX() - 1.0f);
     }
+
+    @Override
+    public void actualizarEstado() {
+        actualizarPosicion();
+    }
     
 }

@@ -58,7 +58,6 @@ public class PanelJuego extends JPanel {
         }
     }
     
-    
     public Juego getJuego() {
         return juego;
     }
@@ -78,11 +77,5 @@ public class PanelJuego extends JPanel {
     public void setPaused(boolean paused) {
         this.paused = paused;
     }
-    
-     
-    
-
-    
-    
-    
+      
 }

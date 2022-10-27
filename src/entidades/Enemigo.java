@@ -4,7 +4,6 @@
  */
 package entidades;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -18,7 +17,7 @@ public class Enemigo extends Nave implements Config {
     
     private Rectangle2D.Float hitbox;
     private Disparo disparo;
-    private boolean viva = false;
+    private boolean viva = true;
     private Image propulsor;
 
     public Enemigo(boolean maquina, float x, float y, int ancho, int alto) {
@@ -44,7 +43,7 @@ public class Enemigo extends Nave implements Config {
     }
     
     @Override
-    public void actualizarEstdo() {
+    public void actualizarEstado() {
         actualizarPosicion();
         actualizarHitbox();
         this.getDisparo().actualizarEstado();
@@ -79,6 +78,9 @@ public class Enemigo extends Nave implements Config {
         this.setX(this.getX() - 1.5f);
     }
 
+    /**
+     * Define la imagen que usara para el propulsor enemigo
+     */
     public void sacarImgAni() {
         Toolkit t = Toolkit.getDefaultToolkit();
         setPropulsor(t.getImage("src/recursos/propEnemigo.png"));
@@ -147,5 +149,4 @@ public class Enemigo extends Nave implements Config {
     public void setPropulsor(Image propulsor) {
         this.propulsor = propulsor;
     }
-    
 }

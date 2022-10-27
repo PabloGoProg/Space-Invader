@@ -6,7 +6,6 @@ package entidades;
 
 import static animaciones.constantes.Direccion.*;
 import controladores.SClip;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -31,12 +30,10 @@ public class Nave extends Imagen implements Config {
     protected ArrayList<Disparo> disparos;
     protected ArrayList<Image> movAni;
     protected SClip disparo = new SClip("src/recursos/008842292_prev.wav");
-    protected final int widht = 60;
-    protected final int heigh = 60;
     
     public Nave(boolean maquina, float x, float y, int ancho, int alto) {
         super(maquina, x, y, ancho, alto);
-        this.hitbox = new Rectangle2D.Float(this.getX(), this.getY()+13, this.widht, this.heigh-32);
+        this.hitbox = new Rectangle2D.Float(this.getX(), this.getY()+13, this.ancho ,this.alto);
         this.posiblesNaves = new ArrayList<>();
         this.disparos = new ArrayList<>();
         this.movAni = new ArrayList<>();
@@ -47,7 +44,8 @@ public class Nave extends Imagen implements Config {
     /**
      * Se encarga de actualzar la pantlla con la ultima información recogida
      */
-    public void actualizarEstdo() {
+    @Override
+    public void actualizarEstado() {
         actualizarPosicion();
         actualizarHitbox();
         actualizarDiapros();

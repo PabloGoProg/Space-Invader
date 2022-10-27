@@ -7,7 +7,6 @@ package inputs;
 import controladores.PanelJuego;
 import controladores.SClip;
 import estados.EstadosDeJuego; 
-import estados.Menu;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -92,7 +91,7 @@ public class InputTeclado implements KeyListener {
                     this.panelJuego.setPaused(true);
                 } else {
                     this.panelJuego.getJuego().getJugando().setJuegoEnCurso(true);
-                    this.panelJuego.getJuego().getMenu().getSoundtrack().play();
+                    this.panelJuego.getJuego().getMenu().getSoundtrack().loop();
                     this.panelJuego.setPaused(false);
                 }
                 break;
