@@ -53,7 +53,7 @@ public class Jugando extends Estado implements MetodosEstado {
     public void crearEnemigos() {
         for (int i = 0; i < 5; i++) {
             this.getEnemigos().add(new Enemigo(true,
-                    Math.round(Math.random() * Config.WIDTH + 100 + 1100),
+                    Math.round(Math.random() * Config.WIDTH + 1100),
                     Math.round(Math.random() * Config.HEIGH - 48 + 5), 48, 48));
         }
     }
@@ -61,9 +61,9 @@ public class Jugando extends Estado implements MetodosEstado {
     @Override
     public void actualizar() {
         if(isJuegoEnCurso()) {
-            this.getNave().actualizarEstdo();
+            this.getNave().actualizarEstado();
             for (Enemigo temp : getEnemigos()) {
-                temp.actualizarEstdo();
+                temp.actualizarEstado();
             }
             validarColDispario();
             for (Estrella temp : getEstrellas()) {
@@ -94,13 +94,10 @@ public class Jugando extends Estado implements MetodosEstado {
                 if (disp.getHitbox().intersects(enemigo.getHitbox()) && enemigo.isViva()) {
                     disp.setEnRango(false);
                     enemigo.setViva(false);
-                    System.out.println("BOOm");
                 }
             }
         }
     }
-
-    
 
     public void choque() {
         for (Enemigo cur : getEnemigos()) {

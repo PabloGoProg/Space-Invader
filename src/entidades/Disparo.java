@@ -41,6 +41,7 @@ public class Disparo extends Imagen implements Config{
         imagenesAnimacion();
     }
     
+    @Override
     public void actualizarEstado() {
         actualizarPosicion();
         actualizarAnimacion();

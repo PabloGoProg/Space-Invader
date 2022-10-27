@@ -32,7 +32,6 @@ public class Juego implements Runnable {
         correrJuego();
     }
 
-    
     /**
      * Hilo encargado de correr el juego con la cantidad de fps queridos
      */
@@ -44,22 +43,25 @@ public class Juego implements Runnable {
         long actual = System.nanoTime();
         long tiempoPrevio = System.nanoTime();
         double deltaActu = 0;
-            while(playing) {
-                actual = System.nanoTime();
-                long tiempoActual = System.nanoTime();
-                deltaActu += (tiempoActual - tiempoPrevio) / tiempoPorActu;
-                tiempoPrevio = tiempoActual;
-                if(deltaActu >= 1) {
-                    actualizar();
-                    deltaActu --;
-                }
-                if(actual - ultimoFrame >= tiempoPorFrame) {
-                    getPanel().repaint();
-                    ultimoFrame = actual;
-                }
+        while(playing) {
+            actual = System.nanoTime();
+            long tiempoActual = System.nanoTime();
+            deltaActu += (tiempoActual - tiempoPrevio) / tiempoPorActu;
+            tiempoPrevio = tiempoActual;
+            if(deltaActu >= 1) {
+                actualizar();
+                deltaActu --;
             }
+            if(actual - ultimoFrame >= tiempoPorFrame) {
+                getPanel().repaint();
+                ultimoFrame = actual;
+            }
+        }
     }
     
+    /**
+     * Se encarga de actualizar el estado actual en el panel de juego
+     */
     public void actualizar() {
         switch (EstadosDeJuego.estadoActual) {
             case MENU:
@@ -73,7 +75,7 @@ public class Juego implements Runnable {
     }
     
      /**
-     * Renderiza al jugador
+     * Renderiza el estado actual sobre el panel de juego
      * @param g 
      */
     public void renderizar(Graphics g) {
@@ -84,8 +86,7 @@ public class Juego implements Runnable {
             case JUGANDO:
                 getJugando().actualizarRenderizado(g);
                 break;
-                
-       }
+        }
     }
 
     /**
@@ -104,17 +105,11 @@ public class Juego implements Runnable {
         this.setJugando(new Jugando(this));
     }
     
+    /**
+     * Se encarga de reinicar la partida 
+     */
     public void reiniciarJuego(){
         this.setJugando(new Jugando(this));
-    }
-    
-    public void pausar() {
-        if(isPlaying()) {
-            setPlaying(false);
-            this.panel.getMenuSound().stop();
-        } else {
-            setPlaying(true);
-        }
     }
 
     /**

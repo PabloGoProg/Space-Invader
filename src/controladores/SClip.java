@@ -45,6 +45,9 @@ public class SClip {
         }
     }
 
+    /**
+     * \Reproduce el audio una unica vez
+     */
     public void play() {
         new Thread( () -> {
             audioClip.setFramePosition(0);
@@ -52,6 +55,9 @@ public class SClip {
         }){}.start();
     }
 
+    /**
+     * Reproduce el audio en un bucle infinito
+     */
     public void loop() {
         new Thread( () -> {
             audioClip.setFramePosition(0);
@@ -59,10 +65,16 @@ public class SClip {
         }){}.start();
     }
 
+    /**
+     * Para de reproducir el audio
+     */
     public void stop() {
         audioClip.stop();
     }
     
+    /**\
+     * Se encarga de generare el hilo para reproducir la musica
+     */
     public void music() {
         if(play){
             new Thread( () -> {

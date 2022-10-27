@@ -10,32 +10,12 @@ package animaciones;
  */
 public class constantes {
     
+    /**
+     * Definen las posibles direcciones que puede tomar el jugador
+     */
     public static class Direccion {
         public static final int DERECHA = 0;
         public static final int IZQUIERDA = 1;
-    }
-    
-    public static class constantesJugador {
-        public static final int REPOSO = 1;
-        public static final int ACELERANDO = 2;
-        public static final int FRENANDO = 3;
-        public static final int DISPARANDO = 4;
-        public static final int MURIENDO = 5;
-        
-        public static void CantidadAnimaciones(int accion) {
-        switch (accion) {
-            case ACELERANDO:
-                break;
-            case FRENANDO:
-                break;
-            case DISPARANDO:
-                break;
-            case MURIENDO:
-                break;
-            default:
-                throw new AssertionError();
-        }
-    }
     }
 
 }
