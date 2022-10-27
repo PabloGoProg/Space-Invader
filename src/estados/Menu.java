@@ -20,7 +20,7 @@ import java.awt.Toolkit;
 public class Menu extends Estado implements MetodosEstado {
     
     // Audio de menu
-    SClip soundtrack = new SClip("src/recursos/soundtrack.wav");
+    private SClip soundtrack = new SClip("src/recursos/soundtrack.wav");
     
     public Menu(Juego juego) {
         super(juego);
@@ -58,6 +58,11 @@ public class Menu extends Estado implements MetodosEstado {
     public void keyPressed(KeyEvent e) {
         
     }
+
+    public SClip getSoundtrack() {
+        return soundtrack;
+    }
+    
     
 }    
 

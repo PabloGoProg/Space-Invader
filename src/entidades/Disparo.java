@@ -4,6 +4,7 @@
  */
 package entidades;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -34,7 +35,7 @@ public class Disparo extends Imagen implements Config{
      */
     public Disparo(boolean maquina, float x, float y, int ancho, int alto, int direccion) {
         super(maquina, x, y, ancho, alto);
-        hitbox = new Rectangle2D.Float(this.getX(), this.getY(), 16, 16);
+        hitbox = new Rectangle2D.Float(this.getX(), this.getY(), 32, 16);
         this.imagenesAni = new ArrayList<>();
         this.direccion = direccion;
         imagenesAnimacion();
@@ -48,6 +49,7 @@ public class Disparo extends Imagen implements Config{
     @Override
     public void renderizar(Graphics g) {
         g.drawImage(getImagenesAni().get(getUltimaAni()), (int) this.getX(), (int) this.getY(), 128, 128, null);
+        
     }
     
     /**
@@ -60,7 +62,7 @@ public class Disparo extends Imagen implements Config{
         } 
         
         this.x += (getDireccion() * getVelocidadProyectil());
-        hitbox.x = this.getX()+38;
+        hitbox.x = this.getX()+25;
         hitbox.y = this.getY()+57;
     }
     

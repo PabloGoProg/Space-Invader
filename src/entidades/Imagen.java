@@ -26,7 +26,8 @@ public class Imagen {
         this.y = y;
         this.ancho = ancho;
         this.alto = alto;
-        hitbox = new Rectangle2D.Float(x, y, x, y);
+        hitbox = new Rectangle2D.Float(x, y, alto, ancho);
+        
     }
     
     public Imagen(String ruta, boolean maquina) {

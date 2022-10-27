@@ -9,6 +9,7 @@ import entidades.Config;
 import inputs.InputTeclado;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -22,6 +23,7 @@ public class PanelJuego extends JPanel {
     private Juego juego;
     private JButton play;
     private SClip menuSound = new SClip("src/recursos/menuSound.wav");
+    private boolean paused = false;
     
     public PanelJuego(Juego juego) {
         this.juego = juego;
@@ -49,6 +51,11 @@ public class PanelJuego extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         juego.renderizar(g);
+        if(paused){
+            g.setFont(new Font( "Tahoma", Font.BOLD, 46 ) );
+            g.setColor(Color.WHITE);
+            g.drawString("PAUSED", (Config.WIDTH/2)-70, (Config.HEIGH/2)-50);
+        }
     }
     
     
@@ -67,6 +74,13 @@ public class PanelJuego extends JPanel {
     public SClip getMenuSound() {
         return menuSound;
     }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
+    }
+    
+     
+    
 
     
     
