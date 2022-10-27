@@ -131,6 +131,10 @@ public class Jugando extends Estado implements MetodosEstado {
         }
     }
     
+    /**
+     * Retorna la nave
+     * @return 
+     */
     public Nave getNave() {
         return nave;
     }
